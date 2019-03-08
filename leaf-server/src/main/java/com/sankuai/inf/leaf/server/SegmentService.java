@@ -28,8 +28,11 @@ public class SegmentService {
 
 
             // Config dataSource
+            // ?serverTimezone=Shanghai&?useUnicode=true&characterEncoding=utf8&useSSL=false
             dataSource = new DruidDataSource();
             dataSource.setUrl(properties.getProperty(Constants.LEAF_JDBC_URL));
+            dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+            dataSource.setTestWhileIdle(false);
             dataSource.setUsername(properties.getProperty(Constants.LEAF_JDBC_USERNAME));
             dataSource.setPassword(properties.getProperty(Constants.LEAF_JDBC_PASSWORD));
             dataSource.init();
