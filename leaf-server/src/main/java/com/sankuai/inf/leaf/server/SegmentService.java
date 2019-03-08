@@ -31,8 +31,18 @@ public class SegmentService {
             // ?serverTimezone=Shanghai&?useUnicode=true&characterEncoding=utf8&useSSL=false
             dataSource = new DruidDataSource();
             dataSource.setUrl(properties.getProperty(Constants.LEAF_JDBC_URL));
+            dataSource.setInitialSize(10);
+            dataSource.setMaxActive(500);
+            dataSource.setMaxWait(10000);
+            dataSource.setTimeBetweenEvictionRunsMillis(80000);
+            dataSource.setMinEvictableIdleTimeMillis(60000);
+            dataSource.setValidationQuery("SELECT 1");
+            dataSource.setTestOnBorrow(false);
+            dataSource.setTestOnReturn(false);
+            dataSource.setPoolPreparedStatements(false);
+            dataSource.setMaxPoolPreparedStatementPerConnectionSize(300);
             dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-            dataSource.setTestWhileIdle(false);
+            dataSource.setTestWhileIdle(true);
             dataSource.setUsername(properties.getProperty(Constants.LEAF_JDBC_USERNAME));
             dataSource.setPassword(properties.getProperty(Constants.LEAF_JDBC_PASSWORD));
             dataSource.init();
